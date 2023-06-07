@@ -1,5 +1,15 @@
+import useSnackbar from "@/src/hooks/useSnackbar"
+import { Button } from "@mui/material"
 
+const TiendaNube = () => {
+    const { showMessage } = useSnackbar();
 
-const TiendaNube = () => <div> TiendaNube</div>
+    
+    return (
+        <Button onClick={() => showMessage('holis', 'success')}>
+            click
+        </Button>
+    )
+}
 
 export default TiendaNube

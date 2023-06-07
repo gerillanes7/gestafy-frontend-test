@@ -4,21 +4,21 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Questions = () => {
 
-    // const { questionsAnswered, questionsUnanswered, isLoading } = useQuestions()
+    const { questionsAnswered, questionsUnanswered, isLoading, asnwerQuestion } = useQuestions()
 
-    // if (isLoading) {
-    //     return <div style={{display: 'flex', justifyContent: 'center'}}>
-    //         <CircularProgress />
-    //     </div>
-    // }
+    if (isLoading) {
+        return <div style={{display: 'flex', justifyContent: 'center'}}>
+            <CircularProgress />
+        </div>
+    }
 
     return (
         <>
-        Questions
-            {/* <QuestionsTab
+            <QuestionsTab
                 answered={questionsAnswered}
                 unanswered={questionsUnanswered}
-            /> */}
+                asnwerQuestion={asnwerQuestion}
+            />
         </>
     )
 }

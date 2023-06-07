@@ -37,12 +37,12 @@ export const customizerSlice = createSlice({
 
 export const { setActiveDir, setActiveNavbarBg, setActiveSidebarBg, setActiveMode, setActiveTheme, setSidebarWidth } = customizerSlice.actions;
 
-export const selectActiveDir = (state) => state.questions.activeDir;
-export const selectActiveNavbarBg = (state) => state.questions.activeNavbarBg
-export const selectActiveSidebarBg = (state) => state.questions.activeSidebarBg
-export const selectActiveMode = (state) => state.questions.activeMode
-export const selectActiveTheme = (state) => state.questions.activeTheme
-export const selectSidebarWidth = (state) => state.questions.SidebarWidth
+export const selectActiveDir = (state) => state.customizer.activeDir;
+export const selectActiveNavbarBg = (state) => state.customizer.activeNavbarBg
+export const selectActiveSidebarBg = (state) => state.customizer.activeSidebarBg
+export const selectActiveMode = (state) => state.customizer.activeMode
+export const selectActiveTheme = (state) => state.customizer.activeTheme
+export const selectSidebarWidth = (state) => state.customizer.SidebarWidth
 
 
 export default customizerSlice.reducer

@@ -10,20 +10,16 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import CustomTextField from "../../src/components/forms/custom-elements/CustomTextField";
 import CustomFormLabel from "../../src/components/forms/custom-elements/CustomFormLabel";
 
-import img1 from "../../assets/images/backgrounds/login-bg.svg";
-import LogoIcon from "../../src/layouts/logo/LogoIcon";
-import { connect } from "react-redux";
-import { register } from "../../src/redux/actions/authActions";
+// import img1 from "../../assets/images/backgrounds/login-bg.svg";
+// import LogoIcon from "../../src/layouts/logo/LogoIcon";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/dist/client/router";
+import { register } from "@/src/redux/actions/authenticationActions";
 
-const Register = ({
-  // Data
-  errors,
-  isAuthenticated,
-  loading,
-  // Functions
-  register
-}) => {
+const Register = () => {
+
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -41,20 +37,12 @@ const Register = ({
   const onSubmitForm = async (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-
       alert('Las contraseñas no coinciden')
-
     } else {
-      await register({ name, email, password })
+      dispatch(register({ name, email, password }))
+      router.push("/authentication/login")
     }
   }
-
-  const Router = useRouter()
-  React.useEffect(() => {
-    if (isAuthenticated) {
-      Router.push("/");
-    }
-  }, [isAuthenticated, Router]);
 
   return (
     <Grid container sx={{ height: "100vh", justifyContent: "center" }}>
@@ -388,13 +376,5 @@ const Register = ({
 
 Register.layout = "Blank";
 
-const mapStateToProps = (state) => ({
-  errors: state.authReducer.errors,
-  isAuthenticated: state.authReducer.isAuthenticated,
-  loading: state.authReducer.loading
-})
 
-
-export default connect(mapStateToProps, {
-  register
-})(Register)
+export default Register

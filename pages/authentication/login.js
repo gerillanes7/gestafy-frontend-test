@@ -23,6 +23,7 @@ import { useRouter } from "next/dist/client/router";
 
 
 import { login } from "@/src/redux/actions/authenticationActions";
+import useSnackbar from "@/src/hooks/useSnackbar";
 
 // import img1 from "../../assets/images/backgrounds/login-bg.svg";
 // import LogoIcon from "../../src/layouts/logo/LogoIcon";
@@ -33,8 +34,9 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const router = useRouter()
+  const { showMessage } = useSnackbar()
 
-  const isAuthenticated = useSelector(state => state?.authentication?.isAuthenticated)
+  const { isAuthenticated, token, errors } = useSelector(state => state?.authentication)
 
   const [formData, setFormData] = React.useState({
     email: '',
@@ -47,14 +49,18 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const onSubmitForm = async (e) => {
+  const onSubmitForm = (e) => {
     e.preventDefault()
-    await dispatch(login({ email, password }))
+    dispatch(login({ email, password }))
+
+    if(errors?.status === 400) {
+        showMessage(errors?.errors[0]?.msg)
+    }
   }
 
 
   const checkIsAuthenticated = () => {
-    if(isAuthenticated) router.push("/")
+    if (isAuthenticated && token) router.push("/")
   }
   useEffect(() => {
     checkIsAuthenticated()
